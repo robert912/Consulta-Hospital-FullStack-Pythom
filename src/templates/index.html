@@ -1,0 +1,162 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="d-sm-flex">
+  <div class="m-2">
+    <form action="{{url_for('index')}}" method="POST">
+      <div class="card m-3" style="width: 18rem;">
+        <div class="card-header">
+          {{consulta[0][1]}}
+        </div>
+        <ul class="list-group list-group-flush">
+
+          <li class="list-group-item">Doctor: {{consulta[0][3]}}</li>
+          <li class="list-group-item">Pacientes Atendidos: {{consulta[0][2]}}</li>
+          {% if(consulta[0][4]): %}
+          <li class="list-group-item list-group-item-success">Estado: En Espera</li>
+          <li class="list-group-item d-flex justify-content-around">
+            <a href="/liberar/{{consulta[0][0]}}" class="btn btn-primary disabled">Liberar</a>
+            {% if(pediatria): %}
+            <a href="/atender/{{consulta[0][0]}}" class="btn btn-success">Atender</a>
+            {% else: %}
+            <a href="/atender/{{consulta[0][0]}}" class="btn btn-success  disabled">Atender</a>
+            {% endif %}
+          </li>
+          {% else: %}
+          <li class="list-group-item list-group-item-danger">Estado: Ocupado</li>
+          <li class="list-group-item">Paciente: {{pediatria[0][1]}}<br>Edad: {{pediatria[0][2]}}</li>
+          <li class="list-group-item d-flex justify-content-around">
+            <a href="/liberar/{{consulta[0][0]}}" class="btn btn-primary">Liberar</a>
+            <a href="/atender/{{consulta[0][0]}}" class="btn btn-success disabled">Atender</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+
+      <table class="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Nombre completo</th>
+            <th scope="col">Edad</th>
+            <th scope="col">N° HC</th>
+            <th scope="col">Riesgo</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for li in pediatria %}
+          <tr>
+            <td>{{li[1]}}</td>
+            <td>{{li[2]}}</td>
+            <td>{{li[3]}}</td>
+            <td>{{li[5]}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </form>
+  </div>
+
+  <div class="m-2">
+    <div class="card m-3" style="width: 18rem;">
+      <div class="card-header">
+        {{consulta[1][1]}}
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Doctor: {{consulta[1][3]}}</li>
+        <li class="list-group-item">Pacientes Atendidos: {{consulta[1][2]}}</li>
+        {% if(consulta[1][4]): %}
+        <li class="list-group-item list-group-item-success">Estado: En Espera</li>
+        <li class="list-group-item d-flex justify-content-around">
+          <a href="/liberar/{{consulta[1][0]}}" class="btn btn-primary disabled">Liberar</a>
+          {% if(urgencia): %}
+          <a href="/atender/{{consulta[1][0]}}" class="btn btn-success">Atender</a>
+          {% else: %}
+          <a href="" class="btn btn-success  disabled">Atender</a>
+          {% endif %}
+        </li>
+        {% else: %}
+        <li class="list-group-item list-group-item-danger">Estado: Ocupado</li>
+        <li class="list-group-item">Paciente: {{urgencia[0][1]}}<br>Edad: {{urgencia[0][2]}}</li>
+        <li class="list-group-item d-flex justify-content-around">
+          <a href="/liberar/{{consulta[1][0]}}" class="btn btn-primary">Liberar</a>
+          <a href="/atender/{{consulta[1][0]}}" class="btn btn-success disabled">Atender</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+
+    <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Nombre completo</th>
+          <th scope="col">Edad</th>
+          <th scope="col">N° HC</th>
+          <th scope="col">Riesgo</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for li in urgencia %}
+        <tr>
+          <td>{{li[1]}}</td>
+          <td>{{li[2]}}</td>
+          <td>{{li[3]}}</td>
+          <td>{{li[5]}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="m-2">
+    <div class="card m-3" style="width: 18rem;">
+      <div class="card-header">
+        {{consulta[2][1]}}
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Doctor: {{consulta[2][3]}}</li>
+        <li class="list-group-item">Pacientes Atendidos: {{consulta[2][2]}}</li>
+        {% if(consulta[2][4]): %}
+        <li class="list-group-item list-group-item-success">Estado: En Espera</li>
+        <li class="list-group-item d-flex justify-content-around">
+          <a href="/liberar/{{consulta[2][0]}}" class="btn btn-primary disabled">Liberar</a>
+          {% if(cgi): %}
+          <a href="/atender/{{consulta[2][0]}}" class="btn btn-success">Atender</a>
+          {% else: %}
+          <a href="" class="btn btn-success  disabled">Atender</a>
+          {% endif %}
+        </li>
+        {% else: %}
+        <li class="list-group-item list-group-item-danger">Estado: Ocupado</li>
+        <li class="list-group-item">Paciente: {{cgi[0][1]}}<br>Edad: {{cgi[0][2]}}</li>
+        <li class="list-group-item d-flex justify-content-around">
+          <a href="/liberar/{{consulta[2][0]}}" class="btn btn-primary">Liberar</a>
+          <a href="/atender/{{consulta[2][0]}}" class="btn btn-success disabled">Atender</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+
+    <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Nombre completo</th>
+          <th scope="col">Edad</th>
+          <th scope="col">N° HC</th>
+          <th scope="col">Riesgo</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for li in cgi %}
+        <tr>
+          <td>{{li[1]}}</td>
+          <td>{{li[2]}}</td>
+          <td>{{li[3]}}</td>
+          <td>{{li[5]}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</div>
+{% endblock %}

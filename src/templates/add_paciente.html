@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<form action="{{url_for('tipo_paciente')}}" method="POST">
+    <div class="form-row">
+        <div class="form-group py-3 col-md-6">
+            <label for="inputNombre">Nombre</label>
+            <input type="text" class="form-control" id="inputNombre" name="inputNombre" placeholder="Nombre">
+        </div>
+        <div class="form-group py-3 col-md-2">
+            <label for="inputEdad">Edad</label>
+            <input type="number" class="form-control" id="inputEdad" name="inputEdad" placeholder="Edad">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Ingresar</button>
+</form>
+
+{% endblock %}
